@@ -30,6 +30,8 @@ export const ArticleParamsForm = ({
   const sidebarRef = useRef<HTMLElement>(null);
   const [formState, setFormState] = useState<ArticleStateType>(defaultArticleState);
 
+  const [radioGroupKey, setRadioGroupKey] = useState(0);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
       if (
@@ -58,6 +60,7 @@ export const ArticleParamsForm = ({
   const handleReset = (): void => {
     setFormState(defaultArticleState);
     onApply(defaultArticleState);
+    setRadioGroupKey((i) => i + 1);
   };
 
   return (
@@ -84,6 +87,7 @@ export const ArticleParamsForm = ({
           />
 
           <RadioGroup
+            key={radioGroupKey}
             name="fontSize"
             options={fontSizeOptions}
             selected={formState.fontSizeOption}
